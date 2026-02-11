@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const connectDB = require("./models/db");
+
 
 // Models
 const Product = require('./models/Product');
@@ -12,17 +14,20 @@ const Order = require('./models/Order');
 
 const app = express();
 const PORT = 5000;
+connectDB();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/uploads', express.static('uploads'));
+
 
 // --- MongoDB Connection ---
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/jewellery')
-    .then(() => {
-        console.log('MongoDB connected');
-        seedProducts();
-    })
-    .catch(err => console.error('MongoDB connection error:', err));
+// mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/jewelleryDB')
+//     .then(() => {
+//         console.log('MongoDB connected');
+//         seedProducts();
+//     })
+//     .catch(err => console.error('MongoDB connection error:', err));
 
 // --- Seed Initial Data ---
 const seedProducts = async () => {
@@ -35,28 +40,32 @@ const seedProducts = async () => {
                     price: 45000,
                     priceStr: '₹45,000',
                     description: 'This premium diamond necklace is crafted with precision to elevate your elegance.',
-                    details: { Material: 'Gold', Stones: 'Diamonds', Weight: '12g', Purity: '22k' }
+                    details: { Material: 'Gold', Stones: 'Diamonds', Weight: '12g', Purity: '22k' },
+                    image: "/uploads/diamondNecklace.jpg"
                 },
                 {
                     name: 'Gold Pendant Set',
                     price: 32500,
                     priceStr: '₹32,500',
                     description: 'A classic gold pendant set that adds a touch of royalty to any outfit.',
-                    details: { Material: 'Gold', Stones: 'None', Weight: '8g', Purity: '24k' }
+                    details: { Material: 'Gold', Stones: 'None', Weight: '8g', Purity: '24k' },
+                    image: "/uploads/goldPendantSet.jpg"
                 },
                 {
                     name: 'Pearl Earrings',
                     price: 18000,
                     priceStr: '₹18,000',
                     description: 'Elegant pearl earrings suitable for both casual and formal wear.',
-                    details: { Material: 'Silver', Stones: 'Pearls', Weight: '5g', Purity: '92.5' }
+                    details: { Material: 'Silver', Stones: 'Pearls', Weight: '5g', Purity: '92.5' },
+                    image: "/uploads/pearlEarrings.jpg"
                 },
                 {
                     name: 'Silver Bracelet',
                     price: 6500,
                     priceStr: '₹6,500',
                     description: 'A stylish silver bracelet with intricate patterns.',
-                    details: { Material: 'Silver', Stones: 'Zircon', Weight: '15g', Purity: '92.5' }
+                    details: { Material: 'Silver', Stones: 'Zircon', Weight: '15g', Purity: '92.5' },
+                     image: "/uploads/silverBracelet.jpg"
                 },
             ];
             await Product.insertMany(products);

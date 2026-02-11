@@ -13,7 +13,8 @@ const products = [
             Stones: 'Diamonds',
             Weight: '12g',
             Purity: '22k'
-        }
+        },
+        image: "/uploads/diamondNecklace.jpg"
     },
     {
         name: 'Gold Pendant Set',
@@ -26,6 +27,7 @@ const products = [
             Weight: '8g',
             Purity: '24k'
         }
+        ,image: "/uploads/goldPendantSet.jpg"
     },
     {
         name: 'Pearl Earrings',
@@ -37,7 +39,8 @@ const products = [
             Stones: 'Pearls',
             Weight: '5g',
             Purity: '92.5'
-        }
+        },
+        image: "/uploads/pearlEarrings.jpg"
     },
     {
         name: 'Silver Bracelet',
@@ -49,7 +52,8 @@ const products = [
             Stones: 'Zircon',
             Weight: '15g',
             Purity: '92.5'
-        }
+        },
+        image: "/uploads/silverBracelet.jpg"
     },
 ];
 
